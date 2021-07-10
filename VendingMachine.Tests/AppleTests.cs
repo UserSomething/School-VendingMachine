@@ -14,7 +14,7 @@ namespace VendingMachineProject.Tests
         public void When_AppleExamined_Expect_AppleInfo()
         {
             // Arrange
-            string expected = "Info: More green apple.\nPrice: 1000kr.";
+            string expected = "More green apple - 1000kr.";
             Apple apple = new Apple("More green apple", 1000);
             // Act
             string actual = apple.Examine();

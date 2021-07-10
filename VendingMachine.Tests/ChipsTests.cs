@@ -14,7 +14,7 @@ namespace VendingMachineProject.Tests
         public void When_ChipsExamined_Expect_ChipsInfo()
         {
             // Arrange
-            string expected = "Info: Super chips.\nPrice: 150kr.";
+            string expected = "Super chips - 150kr.";
             Chips chips = new Chips("Super chips", 150);
             // Act
             string actual = chips.Examine();

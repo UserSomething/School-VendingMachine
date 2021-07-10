@@ -10,7 +10,7 @@ namespace VendingMachineProject.Tests
         public void When_ColaExamined_Expect_ColaInfo()
         {
             // Arrange
-            string expected = "Info: Regular cola.\nPrice: 5kr.";
+            string expected = "Regular cola - 5kr.";
             VendingItem cola = new Cola("Regular cola", 5);
             // Act
             string actual = cola.Examine();
@@ -22,7 +22,7 @@ namespace VendingMachineProject.Tests
         public void When_AppleExamined_Expect_AppleInfo()
         {
             // Arrange
-            string expected = "Info: Green apple.\nPrice: 10kr.";
+            string expected = "Green apple - 10kr.";
             VendingItem apple = new Apple("Green apple", 10);
             // Act
             string actual = apple.Examine();
@@ -34,7 +34,7 @@ namespace VendingMachineProject.Tests
         public void When_ChipsExamined_Expect_ChipsInfo()
         {
             // Arrange
-            string expected = "Info: Potato chips.\nPrice: 15kr.";
+            string expected = "Potato chips - 15kr.";
             VendingItem chips = new Chips("Potato chips", 15);
             // Act
             string actual = chips.Examine();

@@ -14,7 +14,7 @@ namespace VendingMachineProject.Tests
         public void When_ColaExamined_Expect_ColaInfo()
         {
             // Arrange
-            string expected = "Info: Supreme cola.\nPrice: 50kr.";
+            string expected = "Supreme cola - 50kr.";
             Cola cola = new Cola("Supreme cola", 50);
             // Act
             string actual = cola.Examine();

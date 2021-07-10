@@ -15,7 +15,8 @@ namespace VendingMachineProject.VendingItems
 
         public override string Examine()
         {
-            return $"Info: {this.Info}.\nPrice: {this.Price}kr.";
+            //return $"{this.Info}. Price: {this.Price}kr.";
+            return $"{this.Info} - {this.Price}kr.";
         }
 
         public override string Use()

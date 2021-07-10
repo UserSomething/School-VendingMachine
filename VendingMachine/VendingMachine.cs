@@ -1,23 +1,45 @@
 ﻿using System;
+using System.Text;
+using VendingMachineProject.VendingItems;
 
-namespace VendingMachine
+namespace VendingMachineProject
 {
     public class VendingMachine : IVending
     {
-        readonly int[] validMoney = { 1, 5, 10, 20, 50, 100, 500, 1000 };
-        decimal moneyPool = 0;
+        private VendingItem[] vendingItems = Array.Empty<VendingItem>();
+        private int nextVendingItemsIndex = 0;
+
+        private readonly int[] validMoneyArray = { 1, 5, 10, 20, 50, 100, 500, 1000 };
+        private int[] nonValidMoneyArray = Array.Empty<int>();
+
+        public int MoneyPool { get; set; }
+
+        public void AddItem(VendingItem item)
+        {
+            Array.Resize(ref this.vendingItems, this.vendingItems.Length + 1);
+
+            this.vendingItems[this.nextVendingItemsIndex] = item;
+            this.nextVendingItemsIndex++;
+        }
 
         public void Purchase()
         {
             throw new NotImplementedException();
         }
 
-        public void ShowAll()
+        public string ShowAll()
         {
-            throw new NotImplementedException();
+            StringBuilder allItemsInfoAndPrice = new ();
+
+            foreach (VendingItem v in this.vendingItems)
+            {
+                allItemsInfoAndPrice.Append($"{v.Examine()}\n");
+            }
+
+            return allItemsInfoAndPrice.ToString();
         }
 
-        public void InsertMoney(int money)
+        public string InsertMoney(params int[] insertedMoneyArray)
         {
             throw new NotImplementedException();
         }

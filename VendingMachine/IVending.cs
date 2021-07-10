@@ -1,10 +1,12 @@
-﻿namespace VendingMachine
+﻿using VendingMachineProject.VendingItems;
+
+namespace VendingMachineProject
 {
     public interface IVending
     {
         void Purchase();
-        void ShowAll();
-        void InsertMoney(int money);
+        string ShowAll();
+        string InsertMoney(params int[] moneyArray);
         int EndTransaction();
     }
 }
