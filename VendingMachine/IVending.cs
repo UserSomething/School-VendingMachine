@@ -4,9 +4,12 @@ namespace VendingMachineProject
 {
     public interface IVending
     {
-        void Purchase();
+        string Purchase(VendingItem item);
+
         string ShowAll();
-        string InsertMoney(params int[] moneyArray);
-        int EndTransaction();
+
+        void InsertMoney(int insertedMoney);
+
+        string EndTransaction();
     }
 }

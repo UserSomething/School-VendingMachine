@@ -21,7 +21,8 @@ namespace VendingMachineProject.VendingItems
 
         public override string Use()
         {
-            return "Open the package by the sides.";
+            Console.WriteLine();
+            return "Opening the chips: Open the package by the sides.";
         }
     }
 }

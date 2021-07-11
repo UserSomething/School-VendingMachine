@@ -26,7 +26,7 @@ namespace VendingMachineProject.Tests
         public void When_ChipsUsed_Expect_ChipsUsageInfo()
         {
             // Arrange
-            string expected = "Open the package by the sides.";
+            string expected = "Opening the chips: Open the package by the sides.";
             Chips chips = new Chips("Potato chips", 15);
             // Act
             string actual = chips.Use();

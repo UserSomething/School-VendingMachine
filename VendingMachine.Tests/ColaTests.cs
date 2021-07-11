@@ -26,7 +26,7 @@ namespace VendingMachineProject.Tests
         public void When_ColaUsed_Expect_ColaUsageInfo()
         {
             // Arrange
-            string expected = "Use a finger to lift the small metal part of the can so it opens.";
+            string expected = "Opening the cola: Use a finger to lift the small metal part of the can so it opens.";
             Cola cola = new Cola("Supreme cola", 50);
             // Act
             string actual = cola.Use();

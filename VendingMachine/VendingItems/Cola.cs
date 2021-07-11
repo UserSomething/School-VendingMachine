@@ -21,7 +21,8 @@ namespace VendingMachineProject.VendingItems
 
         public override string Use()
         {
-            return "Use a finger to lift the small metal part of the can so it opens.";
+            Console.WriteLine();
+            return "Opening the cola: Use a finger to lift the small metal part of the can so it opens.";
         }
     }
 }

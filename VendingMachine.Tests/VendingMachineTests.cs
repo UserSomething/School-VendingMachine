@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VendingMachineProject.VendingItems;
+﻿using VendingMachineProject.VendingItems;
 using Xunit;
 
 namespace VendingMachineProject.Tests
@@ -19,7 +14,7 @@ namespace VendingMachineProject.Tests
             vendingMachine.AddItem(new Chips("Potato chips", 11));
             vendingMachine.AddItem(new Cola("Cola", 7));
 
-            string expected = "Red apple - 5kr.\nPotato chips - 11kr.\nCola - 7kr.\n";
+            string expected = "1. Red apple - 5kr.\n2. Potato chips - 11kr.\n3. Cola - 7kr.\n";
             // Act
             string actual = vendingMachine.ShowAll();
             // Assert
@@ -35,86 +30,79 @@ namespace VendingMachineProject.Tests
             vendingMachine.AddItem(new Chips("Salted chips", 20));
             vendingMachine.AddItem(new Cola("Cola zero", 12));
 
-            string expected = "Green apple - 19kr.\nSalted chips - 20kr.\nCola zero - 12kr.\n";
+            string expected = "1. Green apple - 19kr.\n2. Salted chips - 20kr.\n3. Cola zero - 12kr.\n";
             // Act
             string actual = vendingMachine.ShowAll();
             // Assert
             Assert.Equal(expected, actual);
         }
 
-        //[Fact]
-        //public void When_1krInserted_Expect_1krInMoneyPool()
-        //{
-        //    // Arrange
-        //    VendingMachine vendingMachine = new VendingMachine();
-        //    int expected = 1;
-        //    // Act
-        //    vendingMachine.InsertMoney(1);
-        //    int actual = vendingMachine.MoneyPool;
-        //    // Assert
-        //    Assert.Equal(expected, actual);
-        //}
+        [Fact]
+        public void When_ApplePurchased_Expect_AppleUsageString()
+        {
+            VendingMachine vendingMachine = new();
+            vendingMachine.MoneyPool = 100;
+            string expected = "Eating the apple: Grab and bite.";
 
-        //[Fact]
-        //public void When_2krInserted_Expect_Give2krBackToCustomer()
-        //{
-        //    // Arrange
-        //    VendingMachine vendingMachine = new VendingMachine();
-        //    string expected = "Can't accept 2kr, returning the money.";
-        //    // Act
-        //    string actual = vendingMachine.InsertMoney(2);
-        //    // Assert
-        //    Assert.Equal(expected, actual);
-        //}
+            VendingItem apple = new Apple("Red apple", 6);
+            string actual = vendingMachine.Purchase(apple);
 
-        //[Fact]
-        //public void When_5krInserted_Expect_5krInMoneyPool()
-        //{
-        //    // Arrange
-        //    VendingMachine vendingMachine = new VendingMachine();
-        //    int expected = 5;
-        //    // Act
-        //    vendingMachine.InsertMoney(5);
-        //    int actual = vendingMachine.MoneyPool;
-        //    // Assert
-        //    Assert.Equal(expected, actual);
-        //}
+            Assert.Equal(expected, actual);
+        }
 
-        //[Fact]
-        //public void When_7krInserted_Expect_Give7krBackToCustomer()
-        //{
-        //    // Arrange
-        //    VendingMachine vendingMachine = new VendingMachine();
-        //    string expected = "Can't accept 7kr, returning the money.";
-        //    // Act
-        //    string actual = vendingMachine.InsertMoney(7);
-        //    // Assert
-        //    Assert.Equal(expected, actual);
-        //}
+        [Fact]
+        public void When_ChipsPurchased_Expect_ChipsUsageString()
+        {
+            VendingMachine vendingMachine = new();
+            vendingMachine.MoneyPool = 100;
+            string expected = "Opening the chips: Open the package by the sides.";
 
-        //[Fact]
-        //public void When_10krInserted_Expect_10krInMoneyPool()
-        //{
-        //    // Arrange
-        //    VendingMachine vendingMachine = new VendingMachine();
-        //    int expected = 10;
-        //    // Act
-        //    vendingMachine.InsertMoney(10);
-        //    int actual = vendingMachine.MoneyPool;
-        //    // Assert
-        //    Assert.Equal(expected, actual);
-        //}
+            VendingItem chips = new Chips("Chips", 20);
+            string actual = vendingMachine.Purchase(chips);
 
-        //[Fact]
-        //public void When_12krInserted_Expect_Give12krBackToCustomer()
-        //{
-        //    // Arrange
-        //    VendingMachine vendingMachine = new VendingMachine();
-        //    string expected = "Can't accept 12kr, returning the money.";
-        //    // Act
-        //    string actual = vendingMachine.InsertMoney(12);
-        //    // Assert
-        //    Assert.Equal(expected, actual);
-        //}
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
+        public void When_ColaPurchased_Expect_ColaUsageString()
+        {
+            VendingMachine vendingMachine = new();
+            vendingMachine.MoneyPool = 100;
+            string expected = "Opening the cola: Use a finger to lift the small metal part of the can so it opens.";
+
+            VendingItem cola = new Cola("Cola zero", 14);
+            string actual = vendingMachine.Purchase(cola);
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(1, 1)]
+        [InlineData(5, 5)]
+        [InlineData(10, 10)]
+        public void When_RightMoneyInserted_Expect_RightAmountInMoneyPool(int rightMoney, int expected)
+        {
+            VendingMachine vendingMachine = new ();
+
+            vendingMachine.InsertMoney(rightMoney);
+            int actual = vendingMachine.MoneyPool;
+
+            Assert.Equal(expected, actual);
+        }
+
+        [Theory]
+        [InlineData(1, "1kr returned.")]
+        [InlineData(5, "5kr returned.")]
+        [InlineData(6, "6kr returned.")]
+        [InlineData(1253, "1253kr returned.")]
+        public void When_TransactionEndedAnyKrAmountInMoneyPool_Expect_AllKrReturned(int moneyPoolAmount, string expected)
+        {
+            VendingMachine vendingMachine = new();
+
+            vendingMachine.MoneyPool = moneyPoolAmount;
+            string actual = vendingMachine.EndTransaction();
+
+            Assert.Equal(expected, actual);
+        }
     }
 }

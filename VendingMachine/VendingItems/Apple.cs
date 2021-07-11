@@ -21,7 +21,8 @@ namespace VendingMachineProject.VendingItems
 
         public override string Use()
         {
-            return "Grab and bite.";
+            Console.WriteLine();
+            return "Eating the apple: Grab and bite.";
         }
     }
 }

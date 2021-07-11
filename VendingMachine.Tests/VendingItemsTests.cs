@@ -46,7 +46,7 @@ namespace VendingMachineProject.Tests
         public void When_ColaUsed_Expect_ColaUsageInfo()
         {
             // Arrange
-            string expected = "Use a finger to lift the small metal part of the can so it opens.";
+            string expected = "Opening the cola: Use a finger to lift the small metal part of the can so it opens.";
             VendingItem cola = new Cola("Regular cola", 5);
             // Act
             string actual = cola.Use();
@@ -58,7 +58,7 @@ namespace VendingMachineProject.Tests
         public void When_AppleUsed_Expect_AppleUsageInfo()
         {
             // Arrange
-            string expected = "Grab and bite.";
+            string expected = "Eating the apple: Grab and bite.";
             VendingItem apple = new Apple("Green apple", 10);
             // Act
             string actual = apple.Use();
@@ -70,7 +70,7 @@ namespace VendingMachineProject.Tests
         public void When_ChipsUsed_Expect_ChipsUsageInfo()
         {
             // Arrange
-            string expected = "Open the package by the sides.";
+            string expected = "Opening the chips: Open the package by the sides.";
             VendingItem chips = new Chips("Potato chips", 15);
             // Act
             string actual = chips.Use();

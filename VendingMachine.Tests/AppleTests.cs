@@ -26,7 +26,7 @@ namespace VendingMachineProject.Tests
         public void When_AppleUsed_Expect_AppleUsageInfo()
         {
             // Arrange
-            string expected = "Grab and bite.";
+            string expected = "Eating the apple: Grab and bite.";
             Apple apple = new Apple("More green apple", 1000);
             // Act
             string actual = apple.Use();
