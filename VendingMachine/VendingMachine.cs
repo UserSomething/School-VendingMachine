@@ -86,56 +86,26 @@ namespace VendingMachineProject
 
         public string EndTransaction()
         {
+            Dictionary<int, int> moneyLookup = new ()
+            {
+                { 1000, 1000 },
+                { 500, 500 },
+                { 100, 100 },
+                { 50, 50 },
+                { 20, 20 },
+                { 10, 10 },
+                { 5, 5 },
+                { 1, 1 },
+            };
+
             int moneyToReturn = 0;
 
-            while (this.MoneyPool != 0)
+            foreach (var pair in moneyLookup)
             {
-                if (this.MoneyPool >= 1000)
+                while (this.MoneyPool >= pair.Key)
                 {
-                    this.MoneyPool -= 1000;
-                    moneyToReturn += 1000;
-                }
-
-                if (this.MoneyPool >= 500)
-                {
-                    this.MoneyPool -= 500;
-                    moneyToReturn += 500;
-                }
-
-                if (this.MoneyPool >= 100)
-                {
-                    this.MoneyPool -= 100;
-                    moneyToReturn += 100;
-                }
-
-                if (this.MoneyPool >= 50)
-                {
-                    this.MoneyPool -= 50;
-                    moneyToReturn += 50;
-                }
-
-                if (this.MoneyPool >= 20)
-                {
-                    this.MoneyPool -= 20;
-                    moneyToReturn += 20;
-                }
-
-                if (this.MoneyPool >= 10)
-                {
-                    this.MoneyPool -= 10;
-                    moneyToReturn += 10;
-                }
-
-                if (this.MoneyPool >= 5)
-                {
-                    this.MoneyPool -= 5;
-                    moneyToReturn += 5;
-                }
-
-                if (this.MoneyPool >= 1)
-                {
-                    this.MoneyPool -= 1;
-                    moneyToReturn += 1;
+                    this.MoneyPool -= pair.Value;
+                    moneyToReturn += pair.Value;
                 }
             }
 
